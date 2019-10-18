@@ -24,4 +24,18 @@ class UsersController{
     const userList = await this.service.getList();
     return res.json(userList);
   }
+
+  async create(req, res) {
+    const userInfo = req.body;
+    const newUser = await this.service.create(userInfo);
+    return res.json(newUser);
+  }
+
+  async delete(req, res) {
+    const { id: userId } = req.params;
+    await this.service.delete(userId);
+    return res.json({ message: 'success' })
+  }
 }
+
+module.exports = UsersController;

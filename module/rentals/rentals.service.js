@@ -23,3 +23,5 @@ class RentalsService {
     }).exec();
   }
 }
+
+module.exports = RentalsService;

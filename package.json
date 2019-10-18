@@ -4,14 +4,18 @@
   "description": "Book Rental",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Quan Bui",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
+    "concurrently": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ip": "^1.1.5",

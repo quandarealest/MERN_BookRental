@@ -10,6 +10,17 @@ class UsersService {
   getList() {
     return Users.find({}).exec();
   }
+
+  create(userInfo) {
+    return Users.create(userInfo);
+  }
+
+  delete(id){
+    return Users.delete({ _id: id }, {
+      deleteAt: new Date()
+    }).exec();
+  }
+
 }
 
 module.exports = UsersService;
