@@ -3,12 +3,14 @@ const UsersService = require('./users.service');
 class UsersController{
   constructor(){
     this.service = new UsersService();
-    this.get = this.get.bind(this);    
-    this.load = this.load.bind(this);
     this.list = this.list.bind(this);
+    this.get = this.get.bind(this);    
+    this.delete = this.delete.bind(this);
+    this.create = this.create.bind(this);
+    this.load = this.load.bind(this);
   }
 
-  async load(req, res) {
+  async load(req, res, next) {
     const { params } = req;
     const { id: userId } = params;
     const user = await this.service.getOne(userId);
@@ -32,8 +34,9 @@ class UsersController{
   }
 
   async delete(req, res) {
-    const { id: userId } = req.params;
-    await this.service.delete(userId);
+    const { params } = req;
+    const { id } = params;
+    await this.service.delete(id);
     return res.json({ message: 'success' })
   }
 }

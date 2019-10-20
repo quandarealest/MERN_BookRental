@@ -31,6 +31,21 @@ export const actions = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case ACTION_TYPES.GET_BOOKS:
+      return {
+        ...state,
+        bookList: action.payload,
+      }
+    case ACTION_TYPES.ADD_BOOK:
+      return {
+        ...state,
+        bookList: [action.payload, ...state.bookList],
+      }
+    case ACTION_TYPES.DELETE_BOOK:
+      return {
+        ...state,
+        bookList: state.bookList.filter(item => item._id !== action.payload),
+      }
     default:
       return state;
   }

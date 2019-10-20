@@ -9,6 +9,10 @@ const RentalsSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    deletedAt: {
+      type: Date,
+      required: false
+    },
     expiredAt: Date
   },
   {

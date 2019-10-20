@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const UsersController = require('./users.controller');
 
-class UsersRoutes {
+class UsersRouter {
   constructor(){
     const controller = new UsersController();
     const router = new Router();
@@ -16,4 +16,4 @@ class UsersRoutes {
   }
 }
 
-module.exports = UsersRoutes;
+module.exports = UsersRouter;

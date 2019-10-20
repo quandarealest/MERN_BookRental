@@ -1,7 +1,9 @@
 const express = require('express');
+const { Router } = express;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const rootRoute = require('./module/routes');
 const Logger = require('./logger');
 
 const port = process.env.PORT || 5000;
@@ -9,8 +11,11 @@ const app = express();
 
 require('dotenv').config();
 
+const mainRoute = new Router();
+mainRoute.use('/api', rootRoute);
 //body parser middleware
 app.use(bodyParser.json());
+app.use(mainRoute);
 
 mongoose
   .connect(process.env.DB_CONNECTION, {

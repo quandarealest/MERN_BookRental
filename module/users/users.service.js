@@ -8,7 +8,9 @@ class UsersService {
   }
 
   getList() {
-    return Users.find({}).exec();
+    return Users.find({
+      deletedAt: null
+    }).exec();
   }
 
   create(userInfo) {
@@ -16,8 +18,8 @@ class UsersService {
   }
 
   delete(id){
-    return Users.delete({ _id: id }, {
-      deleteAt: new Date()
+    return Users.updateOne({ _id: id }, {
+      deletedAt: new Date()
     }).exec();
   }
 

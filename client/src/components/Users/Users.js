@@ -1,32 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import BooksModal from './BooksModal';
-export default class Books extends Component {
+import UsersModal from './UsersModal';
+
+export default class Users extends Component {
   componentDidMount(){
-    const { getBooks } = this.props;
-    getBooks();
+    const { getUserList } = this.props;
+    getUserList();
+  }
+
+  onAddItem = (newUser) => {
+    const { addUser } = this.props;
+    addUser(newUser);
   }
 
   onDeleteClick = (id) => {
-    const { deleteBook } = this.props;
-    deleteBook(id);
-  }
-
-  onAddItem = (newBook) => {
-    const { addBook } = this.props;
-    addBook(newBook);
+    const { deleteUser } = this.props;
+    deleteUser(id);
   }
 
   render() {
-    const { bookList = [] } = this.props;
+    const { userList = [] } = this.props;
     return (
       <>
-        <BooksModal addItem={this.onAddItem} />
+        <UsersModal addItem={this.onAddItem} />
         <ListGroup>
           <TransitionGroup>
-            {bookList.map(({_id, title, author}) => (
+            {userList.map(({_id, name, age}) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
@@ -37,7 +38,7 @@ export default class Books extends Component {
                   >
                     &times;
                   </Button>
-                  {`${author}: ${title}`}
+                  {`${name}: ${age}`}
                 </ListGroupItem>
               </CSSTransition>
             ))}

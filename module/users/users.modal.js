@@ -8,7 +8,11 @@ const UsersSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-    }
+    },
+    deletedAt: {
+      type: Date,
+      required: false
+    },
   },
   {
     versionKey: false,

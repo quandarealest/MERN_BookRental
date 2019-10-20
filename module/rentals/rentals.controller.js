@@ -36,8 +36,9 @@ class RentalsController {
   }
 
   async delete(req, res) {
-    const { id: rentalId } = req.params;
-    await this.service.delete(rentalId);
+    const { params } = req;
+    const { id } = params;
+    await this.service.delete(id);
     return res.json({ message: 'success' })
   }
 
