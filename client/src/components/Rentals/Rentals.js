@@ -22,6 +22,7 @@ export default class Rentals extends Component {
 
   renderCustomRentalList = ({ userList, bookList, rentalList }) => {
     let modifyRentalList = [];
+    const { sort } = this.props;
     rentalList.forEach(rental => {
       let newRental = {};
       newRental = { ...rental }; 
@@ -51,7 +52,15 @@ export default class Rentals extends Component {
         }
       }
     });
+    if(sort !== '') {
+      modifyRentalList = modifyRentalList.filter(item => item.userId === sort);
+    }
     return modifyRentalList
+  }
+
+  refresh = () => {
+    const { sortByUser } = this.props;
+    sortByUser('');
   }
 
   render() {
@@ -60,7 +69,6 @@ export default class Rentals extends Component {
     if(Object.keys(rentalList).length !== 0 && Object.keys(userList).length !== 0 && Object.keys(bookList).length !== 0 ) {
       customRentalList = this.renderCustomRentalList({ userList, bookList, rentalList });
     }
-    console.log(customRentalList)
     return (
       <>
         <RentalModal addItem={this.onAddNewRental} userList={userList} bookList={bookList} />
@@ -80,6 +88,12 @@ export default class Rentals extends Component {
                 Expire Date
               </th>
               <th>
+              <Button 
+                color="dark" 
+                onClick={this.refresh}
+              >
+                Refresh
+              </Button>
               </th>
             </tr>
           </thead>

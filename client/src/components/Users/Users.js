@@ -20,6 +20,11 @@ export default class Users extends Component {
     deleteUser(id);
   }
 
+  onSort = (id) => {
+    const { sortByUser } = this.props;
+    sortByUser(id);
+  }
+
   render() {
     const { userList = [] } = this.props;
     return (
@@ -28,7 +33,7 @@ export default class Users extends Component {
         <ListGroup>
           <TransitionGroup>
             {userList.map(({_id, name, age}) => (
-              <CSSTransition key={_id} timeout={500} classNames="fade">
+              <CSSTransition key={_id} timeout={500} classNames="fade" onClick={() => this.onSort(_id)}>
                 <ListGroupItem>
                   <Button
                     className="remove-btn"
